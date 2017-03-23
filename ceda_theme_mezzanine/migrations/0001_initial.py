@@ -42,7 +42,7 @@ class Migration(migrations.Migration):
                 ('title', models.CharField(max_length=100)),
                 ('content', mezzanine.core.fields.RichTextField()),
                 ('link', models.CharField(blank=True, help_text=b'Optional, if provided clicking the box will go here.', max_length=2000)),
-                ('homepage', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='boxes', to='jasmin_theme_mezzanine.HomePage')),
+                ('homepage', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='boxes', to='ceda_theme_mezzanine.HomePage')),
             ],
             options={
                 'ordering': ('_order',),
@@ -97,7 +97,7 @@ class Migration(migrations.Migration):
                 ('_order', mezzanine.core.fields.OrderField(null=True, verbose_name='Order')),
                 ('file', mezzanine.core.fields.FileField(max_length=200, verbose_name='File')),
                 ('alt_text', models.CharField(blank=True, max_length=200)),
-                ('portfolioitem', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='images', to='jasmin_theme_mezzanine.PortfolioItem')),
+                ('portfolioitem', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='images', to='ceda_theme_mezzanine.PortfolioItem')),
             ],
             options={
                 'ordering': ('_order',),
@@ -121,6 +121,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='portfolioitem',
             name='categories',
-            field=models.ManyToManyField(blank=True, related_name='portfolioitems', to='jasmin_theme_mezzanine.PortfolioItemCategory', verbose_name='Categories'),
+            field=models.ManyToManyField(blank=True, related_name='portfolioitems', to='ceda_theme_mezzanine.PortfolioItemCategory', verbose_name='Categories'),
         ),
     ]
