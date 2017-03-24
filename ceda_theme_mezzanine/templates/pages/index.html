@@ -129,17 +129,21 @@
 
 		{% if homepage.boxes.all.count > 0 %}
 			<div class="row">
-				{% for box in homepage.boxes.all %}
-					<div class="col-sm-4">
-						<div class="service">
-							<span class="service-icon">
-	                        	{% if box.link %}<a href="{{box.link}}">{% endif %}<i class="fa {{ box.icon }} fa-4x"></i>{% if box.link %}</a>{% endif %}
-	                        </span>
-	                    </div>
-						<h2>{{ box.title }} {% if box.link %}<a href="{{box.link}}" class="btn btn-primary btn-xs"> &raquo;</a>{% endif %}</h2>
-						{{ box.content|richtext_filters|safe }}
-					</div>
-				{% endfor %}
+                {% for box in homepage.boxes.all %}
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4><i class="fa fa-fw {% if box.icon %}{{box.icon}}{% else %}fa-check{% endif %}"></i>{{ box.title }}</h4>
+                        </div>
+                        <div class="panel-body">
+                            <p>{{ box.content|richtext_filters|safe }}</p>
+                            {% if box.link %}
+                            <a href="{{ box.link }}" class="btn btn-default">Learn More</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
 			</div>
 		{% endif %}
 
