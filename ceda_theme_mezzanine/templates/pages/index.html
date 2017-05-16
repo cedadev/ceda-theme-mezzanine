@@ -42,22 +42,23 @@
 {% block page_special %}
 
     {% if homepage.slides.all.count > 0 %}
-
-        <header id="myCarousel" class="carousel slide" style="height: 250px; margin: 10 auto">
+        {% with homepage.slides.all as slides %}
+        <header id="myCarousel" class="carousel slide" style="height: 250px; margin-bottom: 10px">
             <!-- Indicators -->
             <ol class="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0"></li>
-                <li data-target="#myCarousel" data-slide-to="1"></li>
-                <li data-target="#myCarousel" data-slide-to="2"></li>
+                {% for slide in slides %}
+                    <li data-target="#myCarousel" data-slide-to="{{ forloop.counter0 }}" 
+                        {% if forloop.first %} class="active">{% endif %} </li>
+                {% endfor %}
             </ol>
             <!-- Wrapper for slides -->
             <div class="carousel-inner">
 
-                {% for slide in homepage.slides.all %}
+                {% for slide in slides %}
                     {% if slide.custom %}
                         {{ slide.custom| richtext_filters | safe }}
                     {% else %}
-                    <div class="item active">
+                    <div class="item {% if forloop.first %} active{% endif %}">
                         <div class="fill" style="background-image:url('{{MEDIA_URL}}{{slide.image}}');"></div>
                         <div class="carousel-caption">
                             <h2>{{ slide.heading }}</h2>
@@ -86,8 +87,8 @@
         </header>
 
         </div>
+        {% endwith %}
     {% endif %}
-
 
 {% endblock %}
 
