@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 {% load mezzanine_tags static blog_tags keyword_tags pages_tags %}
 
-{% block head_js_extra %}
-{{ block.super }}
-<script src="{% static 'jquery-ticker/jquery.ticker.min.js' %}"></script>
-{% endblock %}
+{# The following extra blocks can be uncommetented for use if needed #}
+{# block head_js_extra #}
+{# {{ block.super }} #}
+{# endblock #}
 
-{% block stylesheets_extra %}
-{{ block.super }}
-{% endblock %}
+{# block stylesheets_extra #}
+{# {{ block.super } #}
+{# endblock #}
 
 {% block head_extra %}
 <style>
@@ -106,22 +106,7 @@
                     </div>
                 </div>
             {% endif %}
-            <script>
-            $('.ticker').ticker(
-                $.fn.ticker.defaults = {
-                    random:        false, // Whether to display ticker items in a random order
-                    itemSpeed:     1000,  // The pause on each ticker item before being replaced
-                    cursorSpeed:   30,    // Speed at which the characters are typed
-                    pauseOnHover:  true,  // Whether to pause when the mouse hovers over the ticker
-                    finishOnHover: true,  // Whether or not to complete the ticker item instantly when moused over
-                    cursorOne:     '',   // The symbol for the first part of the cursor
-                    cursorTwo:     '',   // The symbol for the second part of the cursor
-                    fade:          true,  // Whether to fade between ticker items or not
-                    fadeInSpeed:   50,   // Speed of the fade-in animation
-                    fadeOutSpeed:  50    // Speed of the fade-out animation
-                }
-            );
-            </script>
+            
         {% endblock %}
 
 
@@ -160,5 +145,22 @@
     $('.carousel').carousel({
         interval: 5000 //changes the speed
     })
+</script>
+<script src="{% static 'jquery-ticker/jquery.ticker.min.js' %}"></script>
+<script>
+            $('.ticker').ticker(
+                $.fn.ticker.defaults = {
+                    random:        false, // Whether to display ticker items in a random order
+                    itemSpeed:     1000,  // The pause on each ticker item before being replaced
+                    cursorSpeed:   30,    // Speed at which the characters are typed
+                    pauseOnHover:  true,  // Whether to pause when the mouse hovers over the ticker
+                    finishOnHover: true,  // Whether or not to complete the ticker item instantly when moused over
+                    cursorOne:     '',   // The symbol for the first part of the cursor
+                    cursorTwo:     '',   // The symbol for the second part of the cursor
+                    fade:          true,  // Whether to fade between ticker items or not
+                    fadeInSpeed:   50,   // Speed of the fade-in animation
+                    fadeOutSpeed:  50    // Speed of the fade-out animation
+                }
+            );
 </script>
 {% endblock %}
