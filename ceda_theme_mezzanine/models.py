@@ -118,9 +118,6 @@ class Slide(Orderable):
     A slide in a slider connected to a HomePage
     '''
     homepage = models.ForeignKey(HomePage, related_name="slides")
-    background = FileField(verbose_name=_("Background Image"),
-        upload_to=upload_to("theme.Slide.image", "slider"),
-        format="Image", max_length=255, blank=True)
     heading = models.CharField(max_length=100, blank=True)
     subheading = models.CharField(max_length=100, blank=True)
     content = models.TextField(blank=True,

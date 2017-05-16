@@ -41,34 +41,40 @@
 
 {% block page_special %}
 
-<!-- Header Carousel -->
+    {% if homepage.slides.all.count > 0 %}
+
         <header id="myCarousel" class="carousel slide" style="height: 250px; margin: 10 auto">
             <!-- Indicators -->
             <ol class="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="0"></li>
                 <li data-target="#myCarousel" data-slide-to="1"></li>
                 <li data-target="#myCarousel" data-slide-to="2"></li>
             </ol>
             <!-- Wrapper for slides -->
             <div class="carousel-inner">
-                <div class="item active">
-                    <div class="fill" style="background-image:url('http://placehold.it/1900x1080&amp;text=CEDA Image 1');"></div>
-                    <div class="carousel-caption">
-                        <h2>Expertise in Environmental Informatics</h2>
+
+                {% for slide in homepage.slides.all %}
+                    {% if slide.custom %}
+                        {{ slide.custom| richtext_filters | safe }}
+                    {% else %}
+                    <div class="item active">
+                        <div class="fill" style="background-image:url('{{MEDIA_URL}}{{slide.image}}');"></div>
+                        <div class="carousel-caption">
+                            <h2>{{ slide.heading }}</h2>
+                            {% if slide.subheading %}
+                                <p>{{ slide.subheading }}</p>
+                            {% endif %}
+                            {% if slide.content %}
+                                <p class="small">{{ slide.content| richtext_filters | safe }}</p>
+                            {% endif %}
+                            {% if slide.button_text and slide.button_link %}
+                                <a href="{{ slide.button_link }}" class="btn btn-default btn-small pull-right">{{ slide.button_text }}</a>
+                            {% endif %}
+                        </div>
                     </div>
-                </div>
-                <div class="item">
-                    <div class="fill" style="background-image:url('http://placehold.it/1900x1080&amp;text=CEDA Image 2');"></div>
-                    <div class="carousel-caption">
-                        <h2>Petascale digital curation</h2>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="fill" style="background-image:url('http://placehold.it/1900x1080&amp;text=CEDA Image 3');"></div>
-                    <div class="carousel-caption">
-                        <h2>Enabling Environmental Science</h2>
-                    </div>
-                </div>
+                    {% endif %}
+                {% endfor %}
+
             </div>
             <!-- Controls -->
             <a class="left carousel-control" href="#myCarousel" data-slide="prev">
@@ -78,6 +84,10 @@
             <span class="icon-next"></span>
         </a>
         </header>
+
+        </div>
+    {% endif %}
+
 
 {% endblock %}
 
