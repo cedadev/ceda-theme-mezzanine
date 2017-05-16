@@ -35,5 +35,5 @@ def home_processor(request, page):
     need to be passed into the context in future
     '''
     homepage = HomePage.objects.prefetch_related(
-        'boxes').get(id=page.homepage.id)
+        'slides', 'boxes').get(id=page.homepage.id)
     return {"homepage": homepage,}

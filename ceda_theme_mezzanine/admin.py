@@ -6,10 +6,13 @@ from mezzanine.pages.admin import PageAdmin
 
 from models import (SiteSectionPage,
                     Portfolio, PortfolioItem, PortfolioItemImage,
-                    PortfolioItemCategory, IconBox, HomePage)
+                    PortfolioItemCategory, IconBox, HomePage, Slide)
 
 
 admin.site.register(SiteSectionPage, PageAdmin)
+
+class SlideInline(TabularDynamicInlineAdmin):
+    model = Slide
 
 class PortfolioItemImageInline(TabularDynamicInlineAdmin):
     model = PortfolioItemImage
@@ -29,6 +32,6 @@ class IconInline(TabularDynamicInlineAdmin):
     model = IconBox
 
 class HomePageAdmin(PageAdmin):
-    inlines = (IconInline,)
+    inlines = (SlideInline, IconInline)
 
 admin.site.register(HomePage, HomePageAdmin)

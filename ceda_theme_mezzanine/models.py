@@ -112,3 +112,25 @@ class IconBox(Orderable):
     content = RichTextField()
     link = models.CharField(max_length=2000, blank=True,
         help_text="Optional, if provided clicking the box will go here.")
+
+class Slide(Orderable):
+    '''
+    A slide in a slider connected to a HomePage
+    '''
+    homepage = models.ForeignKey(HomePage, related_name="slides")
+    background = FileField(verbose_name=_("Background Image"),
+        upload_to=upload_to("theme.Slide.image", "slider"),
+        format="Image", max_length=255, blank=True)
+    heading = models.CharField(max_length=100, blank=True)
+    subheading = models.CharField(max_length=100, blank=True)
+    content = models.TextField(blank=True,
+        help_text="Add <br> for line breaks")
+    button_text = models.CharField(max_length=100, blank=True,
+        help_text="Optional, if present a button with the link specified "
+                  "below will be in the slide")
+    button_link = models.CharField(max_length=2000, blank=True)
+    image = FileField(verbose_name=_("Image"),
+        upload_to=upload_to("theme.Slide.image", "slider"),
+        format="Image", max_length=255, blank=True)
+    custom = models.TextField(blank=True,
+        help_text="Create a custom slide, everything else will be overriden")
