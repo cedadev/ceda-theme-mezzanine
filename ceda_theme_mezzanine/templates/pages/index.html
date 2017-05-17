@@ -26,6 +26,9 @@
   display: inline-block;
   word-wrap: break-word;
 }
+.carousel-caption {
+    text-shadow: 2px 2px 4px #000000;
+}
 </style>
 {% endblock %}
 
@@ -43,7 +46,7 @@
 
     {% if homepage.slides.all.count > 0 %}
         {% with homepage.slides.all as slides %}
-        <header id="myCarousel" class="carousel slide" style="height: 250px; margin-bottom: 20px; margin-top: -20px;">
+        <header id="myCarousel" class="carousel slide" style="height: 250px; margin-bottom: 20px;">
             <!-- Indicators -->
             <ol class="carousel-indicators">
                 {% for slide in slides %}
@@ -63,10 +66,10 @@
                         <div class="carousel-caption">
                             <h2>{{ slide.heading }}</h2>
                             {% if slide.subheading %}
-                                <p>{{ slide.subheading }}</p>
+                                <h5>{{ slide.subheading }}</h5>
                             {% endif %}
                             {% if slide.content %}
-                                <p class="small">{{ slide.content| richtext_filters | safe }}</p>
+                                <p><small>{{ slide.content| richtext_filters | safe }}</small></p>
                             {% endif %}
                             {% if slide.button_text and slide.button_link %}
                                 <a href="{{ slide.button_link }}" class="btn btn-default btn-sm pull-right">{{ slide.button_text }}</a>
