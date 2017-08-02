@@ -25,6 +25,10 @@ class Portfolio(Page):
     '''
     A collection of individual portfolio items
     '''
+
+    content = RichTextField(blank=True,
+        help_text="Brief introduction to Portfolio")
+
     class Meta:
         verbose_name = _("Portfolio")
         verbose_name_plural = _("Portfolios")

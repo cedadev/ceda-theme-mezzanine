@@ -4,6 +4,14 @@
 
 {% block main %}
 
+{% if page.portfolio.content %}
+    <div class="row">
+        <div class="col-lg-12">
+            {{ page.portfolio.content | safe }}
+        </div>
+    </div>
+{% endif %}
+
 <div id="gallery" class="gallery four" style="clear: both;">
     {% for item in items %}
     <div class="element col-md-3 pull-left{% for cat in item.categories.all %} {{ cat.slug }}{% endfor %}">

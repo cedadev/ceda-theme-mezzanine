@@ -26,9 +26,9 @@
     </div>
 
     <div class="col-md-5">
-        {% editable portfolioitem.subtitle portfolioitem.content portfolioitem.href %}
+        {# editable portfolioitem.subtitle portfolioitem.content portfolioitem.href #}
         {% if portfolioitem.subtitle %}<h3>{{ portfolioitem.subtitle }}</h3>{% endif %}
-        {% endeditable %}
+        {# endeditable S#}
         {{ portfolioitem.content|richtext_filters|safe }}
         {% if portfolioitem.href %}<a href="{{ portfolioitem.href }}" class="btn btn-primary">Learn more</a>{% endif %}
     </div>
