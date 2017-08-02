@@ -18,10 +18,8 @@ class PortfolioItemImageInline(TabularDynamicInlineAdmin):
     model = PortfolioItemImage
     max_num = 3
 
-
 class PortfolioItemAdmin(PageAdmin):
     inlines = (PortfolioItemImageInline,)
-
 
 admin.site.register(Portfolio, PageAdmin)
 admin.site.register(PortfolioItem, PortfolioItemAdmin)

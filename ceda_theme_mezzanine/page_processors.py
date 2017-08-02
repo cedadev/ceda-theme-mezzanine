@@ -19,13 +19,13 @@ def portfolioitem_processor(request, page):
     '''
     Adds a portfolio's portfolio items to the context
     '''
-    prortfolioitem = PortfolioItem.objects.published(
+    portfolioitem = PortfolioItem.objects.published(
         for_user=request.user).prefetch_related(
         'categories', 'images').get(id=page.portfolioitem.id)
     items = PortfolioItem.objects.published(for_user=request.user).prefetch_related('categories')
     items = items.filter(parent=page.parent)
     categories = PortfolioItemCategory.objects.filter(portfolioitems__in=items).distinct()
-    return {'portfolioitem': prortfolioitem, 'items': items, 'categories': categories}
+    return {'portfolioitem': portfolioitem, 'items': items, 'categories': categories}
 
 
 @processor_for(HomePage)

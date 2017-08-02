@@ -39,9 +39,17 @@ class PortfolioItem(Page, RichText):
     An individual portfolio item, should be nested under a Portfolio
     '''
     subtitle = models.CharField(max_length=200, blank=True)
+    intro = RichTextField(blank=True,
+        help_text="brief intro paragraph used for leader")
     featured_image = FileField(verbose_name=_("Featured Image"),
         upload_to=upload_to("theme.PortfolioItem.featured_image", "portfolio"),
         format="Image", max_length=255, null=True, blank=True)
+    icon = models.CharField(blank=True,
+        max_length=50,
+        help_text="Enter the name of a font awesome icon, i.e. "
+                  "fa-eye. A list is available here "
+                  "http://fontawesome.io/")
+    
     categories = models.ManyToManyField("PortfolioItemCategory",
                                         verbose_name=_("Categories"),
                                         blank=True,
@@ -52,6 +60,7 @@ class PortfolioItem(Page, RichText):
     class Meta:
         verbose_name = _("Portfolio item")
         verbose_name_plural = _("Portfolio items")
+
 
 
 class PortfolioItemImage(Orderable):

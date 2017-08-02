@@ -12,12 +12,17 @@
     </div>
 {% endif %}
 
-<div id="gallery" class="gallery four" style="clear: both;">
+<div id="gallery" class="gallery three" style="clear: both;">
     {% for item in items %}
-    <div class="element col-md-3 pull-left{% for cat in item.categories.all %} {{ cat.slug }}{% endfor %}">
-
+    <div class="element col-md-4 pull-left{% for cat in item.categories.all %} {{ cat.slug }}{% endfor %}">
+        {# TODO add if / then / else for whether image(s) or icon exists #}
+        {# TODO if icon, display panels as per services.html #}
         <h4><a class="inherit-color" href="{{ item.get_absolute_url }}">{{ item.title }}</a></h4>
-        {{ item.description_from_content|safe }}
+        {% if item.intro %}
+            {{ item.intro|safe }}
+        {% else %}
+            {{ item.description_from_content|safe }}
+        {% endif %}
         {% if item.featured_image %}
 	        <a href="{{ item.get_absolute_url }}">
 	            <div class="thumbnail">
