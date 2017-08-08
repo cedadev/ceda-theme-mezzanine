@@ -16,6 +16,10 @@
 <link rel="stylesheet" href="{% static "css/mezzanine.css" %}">
 {% endblock %}
 
+{% block stylesheets_extra %}
+<link rel="stylesheet" href="{% static "css/ceda-mezzanine.css" %}">
+{% endblock %}
+
 {% block site_name %}{{ settings.SITE_TITLE }}{% endblock %}
 
 {% block navigation %}
