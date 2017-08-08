@@ -3,57 +3,73 @@
 {% load mezzanine_tags static %}
 
 {% block main %}
+<!-- Portfolio Item Row (images, subheading, intro) -->
 <div class="row">
-    <div class="col-md-10">
-        
-        {# if there are images and/or featured_image, show them in a slider #}
-        {% if portfolioitem.featured_image or portfolioitem.images.all %}
-            <div class="flexslider"> {# change this ...dont' need #}
 
-                <ul class="slides">
-                    {% if portfolioitem.featured_image %}
-                    <li data-thumb="{{ MEDIA_URL }}{% thumbnail portfolioitem.featured_image 322 214 %}">
-                        <img alt="{{ page.title }} featured image" src="{{ MEDIA_URL }}{% thumbnail portfolioitem.featured_image 645 0 %}">
-                    </li>
-                    {% endif %}
-                    {% for image in portfolioitem.images.all %}
-                    <li data-thumb="{{ MEDIA_URL }}{% thumbnail image.file 322 214 %}">
-                        <img{% if image.alt_text %} alt="{{ image.alt_text }}"{% endif %} src="{{ MEDIA_URL }}{% thumbnail image.file 645 0 %}">
-                    </li>
-                    {% endfor %}
-                </ul>
+    <div class="col-md-6">
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                {% if portfolioitem.featured_image %}
+                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                {% endif %}
+                {% if portfolioitem.images.all.count > 0 %}
+                    {% with portfolioitem.images.all as slides %}
+                        {% for slide in slides %}
+                            <li data-target="#carousel-example-generic" data-slide-to="{{forloop.counter}}"></li>
+                        {% endfor %}
+                    {% endwith %}
+                {% endif %}
+            </ol>
 
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                {% if portfolioitem.featured_image %}
+                    <div class="item active">
+                        <img class="img-responsive" src="{{ MEDIA_URL }}{% thumbnail portfolioitem.featured_image 0 0 %}" alt="">
+                    </div>
+                {% endif %}
+                {% if portfolioitem.images.all.count > 0 %}
+                    {% with portfolioitem.images.all as slides %}
+                        {% for slide in slides %}
+                            <div class="item">
+                                <img class="img-responsive" src="{{ MEDIA_URL }}{% thumbnail slide.file 0 0 %}" alt="">
+                            </div>
+                        {% endfor %}
+                    {% endwith %}
+                {% endif %}
+                
             </div>
-        {% elif portfolioitem.icon %}
-            {# TODO show (1) panel with icon as heading #}
 
-            <div class="col-md-4">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4><i class="fa fa-fw {% if portfolioitem.icon %}{{portfolioitem.icon}}{% else %}fa-check{% endif %}"></i>{{ box.title }}</h4>
-                    </div>
-                    <div class="panel-body">
-                        <p>{{ box.content|richtext_filters|safe }}</p>
-                        {% if box.link %}
-                        <a href="{{ box.link }}" class="btn btn-default">Learn More</a>
-                        {% endif %}
-                    </div>
-                </div>
-            </div
-        {% endif %}
-
-
+            <!-- Controls -->
+            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+            <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+        </div>
     </div>
 
-    <div class="col-md-5">
-        {# editable portfolioitem.subtitle portfolioitem.content portfolioitem.href #}
-        {% if portfolioitem.subtitle %}<h3>{{ portfolioitem.subtitle }}</h3>{% endif %}
-        {# endeditable #}
+    <div class="col-md-6">
+        {% if portfolioitem.subtitle %}<h3>{{portfolioitem.subtitle}}</h3>{% endif %}
         {% if portfolioitem.intro %}{{ portfolioitem.intro|safe }}{% endif %}
-        {{ portfolioitem.content|safe }}
-        {% if portfolioitem.href %}<a href="{{ portfolioitem.href }}" class="btn btn-primary">Learn more</a>{% endif %}
     </div>
-</div>
+
+</div> <!-- /.row -->
+
+<!-- portfolio item row (content) -->
+<br>
+<div class="row">
+        {{ portfolioitem.content | safe }}
+        {% if portfolioitem.href %}<a href="{{ portfolioitem.href }}" class="btn btn-primary">Learn more</a>{% endif %}
+</div> <!-- /.row -->
+
+
+
+ 
+
+    
 {% endblock %}
 
 {% block right_wrapper %}{% endblock %}
