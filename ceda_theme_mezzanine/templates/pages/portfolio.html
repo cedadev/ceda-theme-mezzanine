@@ -12,25 +12,43 @@
     </div>
 {% endif %}
 
-<div id="gallery" class="gallery three" style="clear: both;">
+<br/>
+
+<div id="gallery" class="gallery three col-lg-12" style="clear: both;">
     {% for item in items %}
-    <div class="element col-md-4 pull-left{% for cat in item.categories.all %} {{ cat.slug }}{% endfor %}">
-        {# TODO add if / then / else for whether image(s) or icon exists #}
-        {# TODO if icon, display panels as per services.html #}
-        <h4><a class="inherit-color" href="{{ item.get_absolute_url }}">{{ item.title }}</a></h4>
-        {% if item.intro %}
-            {{ item.intro|safe }}
-        {% else %}
-            {{ item.description_from_content|safe }}
-        {% endif %}
-        {% if item.featured_image %}
-	        <a href="{{ item.get_absolute_url }}">
-	            <div class="thumbnail">
-	                <img src="{{ MEDIA_URL }}{% thumbnail item.featured_image 255 170 %}">
-	            </div>
-	        </a>
-        {% endif %}
-    </div>
+        <div class="col-md-3 col-sm-6">
+            <div class="panel panel-default text-center">
+                <div class="panel-heading">
+                            
+                        {% if item.featured_image %}
+                            <span class="fa-stack fa-5x">
+                            <i class="fa fa-stack-2x text-primary"></i>
+                            <div class="thumbnail">
+                                <img src="{{ MEDIA_URL }}{% thumbnail item.featured_image 255 0 %}">
+                            </div>
+                            </span>
+                        {% elif item.icon %}
+                            <span class="fa-stack fa-5x">
+                                <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                                <i class="fa {{item.icon}} fa-stack-1x fa-inverse"></i>
+                            </span>
+                        {% else %}
+                            <span class="fa-stack fa-5x">
+                                <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                                <i class="fa fa-info fa-stack-1x fa-inverse"></i>
+                            </span>
+                        {% endif %}
+
+                </div>
+                <div class="panel-body">
+                    <h4><a class="inherit-color" href="{{ item.get_absolute_url }}">{{ item.title }}</a></h4>
+                    {{item.intro | safe}}
+                    <a href="{{ item.get_absolute_url }}" class="btn btn-primary">Learn More</a>
+                </div>
+            </div>
+        </div>
+        
+
     {% endfor %}
 </div>
 {% endblock %}
