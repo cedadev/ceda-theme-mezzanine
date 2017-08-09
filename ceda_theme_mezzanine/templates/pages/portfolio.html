@@ -18,15 +18,16 @@
     {% for item in items %}
         <div class="col-md-3 col-sm-6">
             <div class="panel panel-default text-center">
-                <div class="panel-heading">
-                            
-                        {% if item.featured_image %}
+                <div class="panel-heading">    
+                        {% if item.images.all.count > 0 %}
+                            {% with item.images.all|first as image %}
                             <span class="fa-stack fa-5x">
                             <i class="fa fa-stack-2x text-primary"></i>
                             <div class="thumbnail">
-                                <img src="{{ MEDIA_URL }}{% thumbnail item.featured_image 255 0 %}">
+                                <img src="{{ MEDIA_URL }}{% thumbnail image.file 255 0 %}">
                             </div>
                             </span>
+                            {% endwith %}
                         {% elif item.icon %}
                             <span class="fa-stack fa-5x">
                                 <i class="fa fa-circle fa-stack-2x text-primary"></i>

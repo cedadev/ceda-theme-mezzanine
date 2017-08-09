@@ -5,40 +5,27 @@
 {% block main %}
 <!-- Portfolio Item Row (images or icon, subheading, intro) -->
 <div class="row">
-    {% if portfolioitem.featured_image %}
+    {% if portfolioitem.images.all.count > 0 %}
         <div class="col-md-6">
             <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                 <!-- Indicators -->
                 <ol class="carousel-indicators">
-                    {% if portfolioitem.featured_image %}
-                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                    {% endif %}
-                    {% if portfolioitem.images.all.count > 0 %}
-                        {% with portfolioitem.images.all as slides %}
-                            {% for slide in slides %}
-                                <li data-target="#carousel-example-generic" data-slide-to="{{forloop.counter}}"></li>
-                            {% endfor %}
-                        {% endwith %}
-                    {% endif %}
+                    {% with portfolioitem.images.all as slides %}
+                        {% for slide in slides %}
+                            <li data-target="#carousel-example-generic" data-slide-to="{{forloop.counter0}}"  {% if forloop.first %}class="active"{% endif %}></li>
+                        {% endfor %}
+                    {% endwith %}
                 </ol>
 
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner">
-                    {% if portfolioitem.featured_image %}
-                        <div class="item active">
-                            <img class="img-responsive" src="{{ MEDIA_URL }}{% thumbnail portfolioitem.featured_image 0 0 %}" alt="">
-                        </div>
-                    {% endif %}
-                    {% if portfolioitem.images.all.count > 0 %}
-                        {% with portfolioitem.images.all as slides %}
-                            {% for slide in slides %}
-                                <div class="item">
-                                    <img class="img-responsive" src="{{ MEDIA_URL }}{% thumbnail slide.file 0 0 %}" alt="">
-                                </div>
-                            {% endfor %}
-                        {% endwith %}
-                    {% endif %}
-                    
+                    {% with portfolioitem.images.all as slides %}
+                        {% for slide in slides %}
+                            <div class="item {% if forloop.first %}active{% endif %}" >
+                                <img class="img-responsive" src="{{ MEDIA_URL }}{% thumbnail slide.file 0 0 %}" alt="">
+                            </div>
+                        {% endfor %}
+                    {% endwith %}
                 </div>
 
                 <!-- Controls -->
@@ -54,7 +41,7 @@
         <div class="col-md-6">
             <span class="fa-stack fa-5x">
                 <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                <i class="fa {{portfolioitem.icon}} fa-stack-1x fa-inverse"></i>
+                <i class="fa {% if portfolioitem.icon %}{{portfolioitem.icon}}{% else %}fa-info{% endif %} fa-stack-1x fa-inverse"></i>
             </span>
         </div>
     {% endif %}
