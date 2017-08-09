@@ -90,6 +90,28 @@ ICON_BOX_LAYOUT_CHOICES = (
     ('TB', 'Three across boxes'),
 )
 
+class PortfolioItemPerson(Orderable):
+    '''
+    A person associated with a PortfolioItem
+    '''
+    portfolioitem = models.ForeignKey(PortfolioItem, related_name="persons")
+    image = FileField(_("File"), blank=True, max_length=200, format="Image",
+        upload_to=upload_to("theme.PortfolioItemPerson.file", "persons"))
+    title = models.CharField(blank=True, max_length=200)
+    first_name = models.CharField(max_length=200)
+    last_name = models.CharField(max_length=200)
+    job_title = models.CharField(max_length=200)
+    email = models.EmailField(blank=True)
+    bio = RichTextField(blank=True,
+        help_text="brief bio of person")
+
+    class Meta:
+        verbose_name = _("person")
+        verbose_name_plural = _("persons")
+
+    def __str__(self):
+        return '%s %s' % (self.first_name, self.last_name)
+
 class HomePage(Page):
     '''
     A page representing the format of the home page

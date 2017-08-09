@@ -1,6 +1,6 @@
 {% extends "pages/page.html" %}
 
-{% load mezzanine_tags static %}
+{% load mezzanine_tags static columns %}
 
 {% block main %}
 
@@ -15,41 +15,42 @@
 <br/>
 
 <div id="gallery" class="gallery three col-lg-12" style="clear: both;">
-    {% for item in items %}
-        <div class="col-md-3 col-sm-6">
-            <div class="panel panel-default text-center">
-                <div class="panel-heading">    
-                        {% if item.images.all.count > 0 %}
-                            {% with item.images.all|first as image %}
-                            <span class="fa-stack fa-5x">
-                            <i class="fa fa-stack-2x text-primary"></i>
-                            <div class="thumbnail">
-                                <img src="{{ MEDIA_URL }}{% thumbnail image.file 255 0 %}">
-                            </div>
-                            </span>
-                            {% endwith %}
-                        {% elif item.icon %}
-                            <span class="fa-stack fa-5x">
-                                <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                                <i class="fa {{item.icon}} fa-stack-1x fa-inverse"></i>
-                            </span>
-                        {% else %}
-                            <span class="fa-stack fa-5x">
-                                <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                                <i class="fa fa-info fa-stack-1x fa-inverse"></i>
-                            </span>
-                        {% endif %}
+    {% for col in items|columns:3 %}
+        {% for item in col %}
+            <div class="col-md-4">
+                <div class="panel panel-default text-center">
+                    <div class="panel-heading">    
+                            {% if item.images.all.count > 0 %}
+                                {% with item.images.all|first as image %}
+                                <span class="fa-stack fa-5x">
+                                <i class="fa fa-stack-2x text-primary"></i>
+                                <div class="thumbnail">
+                                    <img src="{{ MEDIA_URL }}{% thumbnail image.file 255 0 %}">
+                                </div>
+                                </span>
+                                {% endwith %}
+                            {% elif item.icon %}
+                                <span class="fa-stack fa-5x">
+                                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                                    <i class="fa {{item.icon}} fa-stack-1x fa-inverse"></i>
+                                </span>
+                            {% else %}
+                                <span class="fa-stack fa-5x">
+                                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                                    <i class="fa fa-info fa-stack-1x fa-inverse"></i>
+                                </span>
+                            {% endif %}
 
-                </div>
-                <div class="panel-body">
-                    <h4><a class="inherit-color" href="{{ item.get_absolute_url }}">{{ item.title }}</a></h4>
-                    {{item.intro | safe}}
-                    <a href="{{ item.get_absolute_url }}" class="btn btn-primary">Learn More</a>
+                    </div>
+                    <div class="panel-body">
+                        <h4><a class="inherit-color" href="{{ item.get_absolute_url }}">{{ item.title }}</a></h4>
+                        {{item.intro | safe}}
+                        <a href="{{ item.get_absolute_url }}" class="btn btn-primary">Learn More</a>
+                    </div>
                 </div>
             </div>
-        </div>
-        
-
+            
+        {% endfor %}
     {% endfor %}
 </div>
 {% endblock %}
