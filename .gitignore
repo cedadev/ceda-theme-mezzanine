@@ -49,6 +49,7 @@ coverage.xml
 
 # Django stuff:
 *.log
+ceda_theme_mezzanine/migrations/
 
 # Sphinx documentation
 docs/_build/
