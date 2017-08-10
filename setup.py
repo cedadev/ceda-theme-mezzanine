@@ -41,6 +41,6 @@ if __name__ == "__main__":
         packages = find_packages(),
         include_package_data = True,
         zip_safe = False,
-        install_requires = ['django', 'ceda-theme-django'],
+        install_requires = ['django', 'ceda-theme-django','django-columns'],
         extras_require = { 'django-bootstrap3' : ['django-bootstrap3'] },
     )
