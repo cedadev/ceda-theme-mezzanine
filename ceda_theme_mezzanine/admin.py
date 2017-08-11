@@ -6,7 +6,7 @@ from mezzanine.pages.admin import PageAdmin
 
 from models import (SiteSectionPage,
                     Portfolio, PortfolioItem, PortfolioItemImage,
-                    PortfolioItemPerson,
+                    Person,PortfolioItemPerson,
                     PortfolioItemCategory, IconBox, HomePage, Slide)
 
 
@@ -15,13 +15,12 @@ admin.site.register(SiteSectionPage, PageAdmin)
 class SlideInline(TabularDynamicInlineAdmin):
     model = Slide
 
+class PortfolioItemPersonInline(TabularDynamicInlineAdmin):
+    model = PortfolioItemPerson
+
 class PortfolioItemImageInline(TabularDynamicInlineAdmin):
     model = PortfolioItemImage
     max_num = 3
-
-class PortfolioItemPersonInline(TabularDynamicInlineAdmin):
-    model = PortfolioItemPerson
-    max_num = 40
 
 class PortfolioItemAdmin(PageAdmin):
     inlines = (PortfolioItemImageInline,PortfolioItemPersonInline)
@@ -29,6 +28,7 @@ class PortfolioItemAdmin(PageAdmin):
 admin.site.register(Portfolio, PageAdmin)
 admin.site.register(PortfolioItem, PortfolioItemAdmin)
 admin.site.register(PortfolioItemCategory)
+admin.site.register(Person)
 
 
 class IconInline(TabularDynamicInlineAdmin):

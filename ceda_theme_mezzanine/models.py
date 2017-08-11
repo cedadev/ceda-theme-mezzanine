@@ -46,7 +46,6 @@ class PortfolioItem(Page, RichText):
         help_text="Enter the name of a font awesome icon, i.e. "
                   "fa-eye. A list is available here "
                   "http://fontawesome.io/")
-    
     categories = models.ManyToManyField("PortfolioItemCategory",
                                         verbose_name=_("Categories"),
                                         blank=True,
@@ -58,7 +57,19 @@ class PortfolioItem(Page, RichText):
         verbose_name = _("Portfolio item")
         verbose_name_plural = _("Portfolio items")
 
+class PortfolioItemPerson(Orderable):
+    '''
+    A Person associated with a PortfolioItem
+    '''
+    portfolioitem = models.ForeignKey(PortfolioItem, related_name="persons")
+    person = models.ForeignKey(
+        "Person",
+        on_delete=models.CASCADE,
+    )
 
+    class Meta:
+        verbose_name = _("Associated person")
+        verbose_name_plural = _("Associated people")
 
 class PortfolioItemImage(Orderable):
     '''
@@ -90,13 +101,12 @@ ICON_BOX_LAYOUT_CHOICES = (
     ('TB', 'Three across boxes'),
 )
 
-class PortfolioItemPerson(Orderable):
+class Person(models.Model):
     '''
-    A person associated with a PortfolioItem
+    A person
     '''
-    portfolioitem = models.ForeignKey(PortfolioItem, related_name="persons")
     image = FileField(_("File"), blank=True, max_length=200, format="Image",
-        upload_to=upload_to("theme.PortfolioItemPerson.file", "persons"))
+        upload_to=upload_to("theme.Person.image", "persons"))
     title = models.CharField(blank=True, max_length=200)
     first_name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200)

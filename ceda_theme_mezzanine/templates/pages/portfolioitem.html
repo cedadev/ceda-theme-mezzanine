@@ -1,6 +1,6 @@
 {% extends "pages/page.html" %}
 
-{% load mezzanine_tags static %}
+{% load mezzanine_tags static columns %}
 
 {% block main %}
 <!-- Portfolio Item Row (images or icon, subheading, intro) -->
@@ -60,8 +60,74 @@
         {% if portfolioitem.href %}<a href="{{ portfolioitem.href }}" class="btn btn-primary">Learn more</a>{% endif %}
 </div> <!-- /.row -->
 
+<hr>
+<!-- People -->
+{% if portfolioitem.persons.all.count > 0 %}
+<h2>Responsible staff</h2>
+{% with portfolioitem.persons.all as items %}
+    <div id="row">
+            <!-- Person List -->
+            {% for col in items|columns:3 %}
+                {% for item in col %}
+                    {% with item.person as person %}
+                    <div class="col-md-4">
+                        <div class="media media-left">
+                            <span class="fa-stack fa-2x">
+                                
+                                {% if person.image %}
+                                    <i class="fa fa-stack-2x text-primary"></i>
+                                    <div class="thumbnail">
+                                        <img src="{{ MEDIA_URL }}{% thumbnail person.image 255 255 %}">
+                                    </div>
+                                {% else %}
+                                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                                    <i class="fa fa-user fa-stack-1x fa-inverse"></i>
+                                {% endif %}
+                            </span> 
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading small"><a class="inherit-color" href="#" data-toggle="modal" data-target="#modal-person-{{person.id}}">{% if person.title %}{{ person.title }} {% endif %}{{person.first_name}} {{person.last_name}}</a></h4>
+                            <p>{{person.job_title}}</p>
+                            
+                        </div>
+                        <div class="modal fade" id="modal-person-{{person.id}}" tabindex="-1" role="dialog">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">{% if person.title %}{{ person.title }} {% endif %}{{person.first_name}} {{person.last_name}}</h4>{% if person.job_title %}<h5>{{ person.job_title }}</h5>{% endif %}
+                                </div>
+                                <div class="modal-body">
+                                    <div class="media media-left">
+                                        <span class="fa-stack fa-2x">
+                                            {% if person.image %}
+                                                <i class="fa fa-stack-2x text-primary"></i>
+                                                <div class="thumbnail">
+                                                    <img src="{{ MEDIA_URL }}{% thumbnail person.image 255 255 %}">
+                                                </div>
+                                            {% else %}
+                                                <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                                                <i class="fa fa-user fa-stack-1x fa-inverse"></i>
+                                            {% endif %}
+                                        </span>
+                                        {{person.bio|safe}}
+                                    </div>
+                                    
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
 
-
+                    </div>
+                {% endwith %}
+                {% endfor %}
+            {% endfor %}
+    </div>
+{% endwith %}
+{% endif %}
  
 
     

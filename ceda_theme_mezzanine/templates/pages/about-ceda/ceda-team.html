@@ -68,11 +68,12 @@
 
 <!-- People -->
 {% if portfolioitem.persons.all.count > 0 %}
-{% with portfolioitem.persons.all as persons %}
+{% with portfolioitem.persons.all as items %}
     <div id="row">
             <!-- Person List -->
-            {% for col in persons|columns:3 %}
-                {% for person in col %}
+            {% for col in items|columns:3 %}
+                {% for item in col %}
+                    {% with item.person as person %}
                     <div class="col-md-4">
                         <div class="media media-left">
                             <span class="fa-stack fa-2x">
@@ -125,11 +126,14 @@
                         </div>
 
                     </div>
+                {% endwith %}
                 {% endfor %}
             {% endfor %}
     </div>
 {% endwith %}
 {% endif %}
+
+
 
 {% endblock %}
 

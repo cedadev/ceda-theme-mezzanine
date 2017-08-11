@@ -1,6 +1,6 @@
 
 from mezzanine.pages.page_processors import processor_for
-from .models import Portfolio, PortfolioItem, PortfolioItemCategory, PortfolioItemPerson, HomePage
+from .models import Portfolio, PortfolioItem, PortfolioItemCategory, Person, HomePage
 
 
 @processor_for(Portfolio)
@@ -25,9 +25,9 @@ def portfolioitem_processor(request, page):
     items = PortfolioItem.objects.published(for_user=request.user).prefetch_related('categories')
     items = items.filter(parent=page.parent)
     categories = PortfolioItemCategory.objects.filter(portfolioitems__in=items).distinct()
-    #people = PortfolioItemPerson.objects.filter(portfolioitems__in=items).distinct()
-    return {'portfolioitem': portfolioitem, 'items': items, 'categories': categories}
-    #    'people': people}
+    #people = Person.objects.filter(portfolioitems__in=items).distinct()
+    return {'portfolioitem': portfolioitem, 'items': items, 'categories': categories,}
+    #'people': people}
 
 
 @processor_for(HomePage)
