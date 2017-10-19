@@ -37,7 +37,7 @@
             <ul class="dropdown-menu">
                 <li><a href="https://services.ceda.ac.uk/cedasite/myceda/user"><i class="fa fa-fw fa-user"></i> Profile</a></li>
                 <li><a href="https://services.ceda.ac.uk/cedasite/myceda/passwd"><i class="fa fa-lock fa-fw"></i> Change password</a></li>
-                <li><a href="{% logout_url request.get_full_path %}"><i class="fa fa-sign-out fa-fw"></i> Sign out</a></li>
+                <li><a href="?logout"><i class="fa fa-sign-out fa-fw"></i> Sign out</a></li>
             </ul>
         </li>
     {% else %}
@@ -46,7 +46,7 @@
                 <i class="fa fa-fw fa-user-o"></i>&nbsp; Sign in <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-                <li><a href="https://auth.ceda.ac.uk/account/signin?r={{ request.build_absolute_uri|urlencode }}">Sign in</a></li>
+                <li><a href="?login">Sign in</a></li>
                 <li><a href="?registration">Register</a></li>
             </ul>
         </li>
