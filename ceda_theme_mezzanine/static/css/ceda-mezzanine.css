@@ -1,3 +1,9 @@
 body {
     padding-top: 140px;
 }
+.carousel-caption {
+    text-shadow: 2px 2px 4px #000000;
+}
+/* Make the carousel controls only appear on hover */
+.carousel .carousel-control { visibility: hidden; }
+.carousel:hover .carousel-control { visibility: visible; }
