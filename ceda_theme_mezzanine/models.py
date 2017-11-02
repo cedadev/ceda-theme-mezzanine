@@ -52,6 +52,9 @@ class PortfolioItem(Page, RichText):
                                         related_name="portfolioitems")
     href = models.CharField(max_length=2000, blank=True,
         help_text="A link to the finished project (optional)")
+    button_text = models.CharField(max_length=100, blank=True,
+        help_text="Optional, if present the default 'Learn More' text"
+        " on the button will be replaced with the text provided")
 
     class Meta:
         verbose_name = _("Portfolio item")
