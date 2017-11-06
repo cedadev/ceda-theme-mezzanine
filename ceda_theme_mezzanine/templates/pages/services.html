@@ -1,0 +1,72 @@
+{% extends "pages/page.html" %}
+
+{% load mezzanine_tags static columns %}
+
+{% block main %}
+
+    <div id="row">
+            <!-- Service List -->
+            {% for col in items|columns:3 %}
+                {% for item in col %}
+                    <div class="col-md-4 service-item">
+                        <a href="{{item.href}}" title="go to service">
+                            <div class="media">
+
+                                <div class="pull-left">
+                                    <span class="fa-stack fa-2x">
+                                            <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                                            {% if item.icon %}
+                                                <i class="fa {{ item.icon }} fa-stack-1x fa-inverse"></i>
+                                            {% else %}
+                                                <i class="fa fa-gears fa-stack-1x fa-inverse"></i>
+                                            {% endif %}
+                                    </span>
+                                </div>
+
+                                <div class="media-body">
+                                    <h4 class="media-heading">{{item.title}}</h4>
+                                    <p>{{item.subtitle}}&nbsp;<a href="{{item.get_absolute_url}}" title="info about service"><i class="fa fa-info-circle"></i></a></p>
+                                    
+                                </div>
+                                
+                            </div>
+                        </a>
+
+                        <div class="modal fade" id="modal-item-{{item.id}}" tabindex="-1" role="dialog">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">{{item.title}}</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="media media-left">
+                                        <span class="fa-stack fa-2x">
+                                            {% if item.icon %}
+                                            <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                                            <i class="fa {{item.icon}} fa-stack-1x fa-inverse"></i>
+                                            {% else %}
+                                                <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                                                <i class="fa fa-gears fa-stack-1x fa-inverse"></i>
+                                            {% endif %}
+                                        </span>
+                                        {% if item.intro %}{{item.intro | safe }}{%endif%}
+                                        {% if item.content %}{{item.content | safe }}{%endif%}
+                                    </div>
+                                    
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+
+                    </div>
+                {% endfor %}
+            {% endfor %}
+    </div>
+
+{% endblock %}
+
+{% block right_wrapper %}{% endblock %}

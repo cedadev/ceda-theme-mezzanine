@@ -82,6 +82,8 @@ class PortfolioItemImage(Orderable):
     file = FileField(_("File"), max_length=200, format="Image",
         upload_to=upload_to("theme.PortfolioItemImage.file", "portfolio items"))
     alt_text = models.CharField(max_length=200, blank=True)
+    is_logo = models.BooleanField(default=False, 
+        help_text='Is this image THE logo for the item?')
 
     class Meta:
         verbose_name = _("Image")
