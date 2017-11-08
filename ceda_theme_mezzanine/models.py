@@ -60,6 +60,12 @@ class PortfolioItem(Page, RichText):
         verbose_name = _("Portfolio item")
         verbose_name_plural = _("Portfolio items")
 
+    def logo(self):
+        return self.images.filter(is_logo=True).first()
+
+    def notLogos(self):
+        return self.images.filter(is_logo=False)
+
 class PortfolioItemPerson(Orderable):
     '''
     A Person associated with a PortfolioItem

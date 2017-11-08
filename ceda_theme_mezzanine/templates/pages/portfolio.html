@@ -20,8 +20,8 @@
             <div class="col-md-4">
                 <div class="panel panel-default text-center">
                     <div class="panel-heading">    
-                            {% if item.images.all.count > 0 %}
-                                {% with item.images.all|first as image %}
+                            {% if item.logo %}
+                                {% with item.logo as image %}
                                 <span class="fa-stack fa-5x">
                                 <i class="fa fa-stack-2x text-primary"></i>
                                 <div class="thumbnail">
