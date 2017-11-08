@@ -22,6 +22,8 @@
 
 {% block site_name %}{{ settings.SITE_TITLE }}{% endblock %}
 
+{% block home_url %}{% url 'home' %}{% endblock %}
+
 {% block navigation %}
     {% search_form %}
     {% page_menu "pages/menus/dropdown.html" %}
