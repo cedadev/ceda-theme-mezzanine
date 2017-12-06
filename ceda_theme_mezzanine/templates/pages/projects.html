@@ -1,0 +1,65 @@
+{% extends "pages/page.html" %}
+
+{% load mezzanine_tags static columns %}
+
+{% block main %}
+
+<div>
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            {% for item in page.children.all %}
+                <li role="presentation" {% if forloop.first %} class="active" {% endif %}><a href="#tab-{{forloop.counter}}" aria-controls="home" role="tab" data-toggle="tab">{{item}}</a></li>
+            {% endfor %}
+        </ul>
+    
+        <!-- Tab panes -->
+        <div class="tab-content">
+            {% for child in page.children.all %}
+                <div role="tabpanel" class="tab-pane {% if forloop.first %} active {% endif %}" id="tab-{{forloop.counter}}">
+
+                    <div id="gallery" class="gallery three col-lg-12" style="clear: both;">
+                            {% for col in child.children.all|columns:3 %}
+                            {% for item in col %}
+                            <div class="col-md-4 service-item">
+                                <a href="{{item.get_absolute_url}}" title="project details">
+                                    <div class="media">
+        
+                                        <div class="pull-left">
+                                            <span class="fa-stack fa-2x">
+                                                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                                                    {% if item.icon %}
+                                                        <i class="fa {{ item.icon }} fa-stack-1x fa-inverse"></i>
+                                                    {% else %}
+                                                        <i class="fa fa-tasks fa-stack-1x fa-inverse"></i>
+                                                    {% endif %}
+                                            </span>
+                                        </div>
+        
+                                        <div class="media-body">
+                                            <h4 class="media-heading">{{item.title}}</h4>
+                                            <p>{{item.subtitle}}</p>
+                                            
+                                        </div>
+                                        
+                                    </div>
+                                </a>
+        
+                                
+        
+                            </div>
+                        {% endfor %}
+        
+                            {% endfor %}
+                        </div>               
+
+                </div>
+            {% endfor %}
+        
+        </div>
+    
+    </div>
+
+{% endblock %}
+
+{% block right_wrapper %}{% endblock %}
