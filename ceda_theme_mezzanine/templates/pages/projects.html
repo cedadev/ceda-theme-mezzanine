@@ -19,39 +19,37 @@
                 <div role="tabpanel" class="tab-pane {% if forloop.first %} active {% endif %}" id="tab-{{forloop.counter}}">
 
                     <div id="gallery" class="gallery three col-lg-12" style="clear: both;">
+                        <div class="row">
                             {% for col in child.children.all|columns:3 %}
-                            {% for item in col %}
-                            <div class="col-md-4 service-item">
-                                <a href="{{item.get_absolute_url}}" title="project details">
-                                    <div class="media">
-        
-                                        <div class="pull-left">
-                                            <span class="fa-stack fa-2x">
-                                                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                                                    {% if item.icon %}
-                                                        <i class="fa {{ item.icon }} fa-stack-1x fa-inverse"></i>
-                                                    {% else %}
-                                                        <i class="fa fa-tasks fa-stack-1x fa-inverse"></i>
-                                                    {% endif %}
-                                            </span>
-                                        </div>
-        
-                                        <div class="media-body">
-                                            <h4 class="media-heading">{{item.title}}</h4>
-                                            <p>{{item.subtitle}}</p>
-                                            
-                                        </div>
-                                        
+                                {% for item in col %}
+                                    <div class="col-md-4 project-item">
+                                        <a href="{{item.get_absolute_url}}" title="project details">
+                                            <div class="media">
+                
+                                                <div class="pull-left">
+                                                    <span class="fa-stack fa-2x">
+                                                            <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                                                            {% if item.icon %}
+                                                                <i class="fa {{ item.icon }} fa-stack-1x fa-inverse"></i>
+                                                            {% else %}
+                                                                <i class="fa fa-tasks fa-stack-1x fa-inverse"></i>
+                                                            {% endif %}
+                                                    </span>
+                                                </div>
+                
+                                                <div class="media-body">
+                                                    <h4 class="media-heading">{{item.title}}</h4>
+                                                    <p>{{item.subtitle}}</p>
+                                                </div>
+                                                
+                                            </div>
+                                        </a>
                                     </div>
-                                </a>
-        
-                                
-        
-                            </div>
-                        {% endfor %}
+                                {% endfor %}
         
                             {% endfor %}
-                        </div>               
+                        </div>
+                    </div>               
 
                 </div>
             {% endfor %}

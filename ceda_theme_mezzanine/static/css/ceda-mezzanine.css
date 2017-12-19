@@ -8,13 +8,14 @@ body {
 .carousel .carousel-control { visibility: hidden; }
 .carousel:hover .carousel-control { visibility: visible; }
 
-/* formatting for service items */
-.service-item {
+/* formatting for service and project items */
+.service-item, .project-item {
     /* space out vertically */
+    padding-top: 10px;
     padding-bottom: 20px;
 }
-.service-item a {
-    /* make hyperlinks within a service item inherit properties rather than applying colour & underline */
+.service-item a, .project-item a {
+    /* make hyperlinks within a service or project item inherit properties rather than applying colour & underline */
     color: inherit;
     text-decoration: inherit;
 }
