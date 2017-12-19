@@ -9,12 +9,12 @@ body {
 .carousel:hover .carousel-control { visibility: visible; }
 
 /* formatting for service and project items */
-.service-item, .project-item {
+.service-item, .project-item, .person-item {
     /* space out vertically */
     padding-top: 10px;
     padding-bottom: 20px;
 }
-.service-item a, .project-item a {
+.service-item a, .project-item a, .person-item a {
     /* make hyperlinks within a service or project item inherit properties rather than applying colour & underline */
     color: inherit;
     text-decoration: inherit;
