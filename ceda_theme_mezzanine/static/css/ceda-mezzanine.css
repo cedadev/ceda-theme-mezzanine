@@ -4,9 +4,10 @@ body {
 .carousel-caption {
     text-shadow: 2px 2px 4px #000000;
 }
-/* Make the carousel controls only appear on hover */
-.carousel .carousel-control { visibility: hidden; }
-.carousel:hover .carousel-control { visibility: visible; }
+/* Make the carousel controls not visible, and only appear on hover */
+.carousel .carousel-control { visibility: hidden; display: none;}
+.carousel:hover .carousel-control { visibility: visible; display: inline-block;}
+
 
 /* formatting for service and project items */
 .service-item, .project-item, .person-item {
@@ -18,4 +19,10 @@ body {
     /* make hyperlinks within a service or project item inherit properties rather than applying colour & underline */
     color: inherit;
     text-decoration: inherit;
+}
+/* thumbnail class for images */
+.thumbnail {
+    border: 0px;
+    padding: 0px;
+    border-radius: 0px;
 }
