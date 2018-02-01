@@ -9,7 +9,7 @@
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
             {% for item in page.children.all %}
-                <li role="presentation" {% if forloop.first %} class="active" {% endif %}><a href="#tab-{{forloop.counter}}" aria-controls="home" role="tab" data-toggle="tab">{{item}}</a></li>
+                <li role="presentation" {% if forloop.first %} class="active" {% endif %}><a href="#tab-{{forloop.counter}}" aria-controls="home" role="tab" data-toggle="tab">{{item.title}}</a></li>
             {% endfor %}
         </ul>
     
