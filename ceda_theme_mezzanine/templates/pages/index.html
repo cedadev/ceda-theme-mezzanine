@@ -29,6 +29,25 @@
 .carousel-caption {
     text-shadow: 2px 2px 4px #000000;
 }
+.carousel-static
+{
+    position: absolute;
+    text-align: center;
+    top: 10px;
+    width: 96.66666666666666%;
+    color: #ffffff;
+    text-shadow: 2px 2px 4px #000000;
+}
+.carousel-credit {
+    position:absolute;
+    bottom:0;
+    right:10px;
+    text-align: right;
+    margin-top: 0px;
+    padding-top: 0px;
+    padding-bottom: 5px;
+    margin-bottom: 0px;
+}
 </style>
 {% endblock %}
 
@@ -46,7 +65,7 @@
 
     {% if homepage.slides.all.count > 0 %}
         {% with homepage.slides.all as slides %}
-        <header id="myCarousel" class="carousel slide" style="height: 250px; margin-bottom: 20px;">
+        <header id="myCarousel" class="carousel slide" style="height: 275px; margin-bottom: 20px;">
             <!-- Indicators -->
             <ol class="carousel-indicators">
                 {% for slide in slides %}
@@ -64,17 +83,21 @@
                     <div class="item {% if forloop.first %} active{% endif %}">
                         <div class="fill" style="background-image:url('{{MEDIA_URL}}{{slide.image}}');"></div>
                         <div class="carousel-caption">
-                            <h2>{{ slide.heading }}</h2>
-                            {% if slide.subheading %}
-                                <h5>{{ slide.subheading }}</h5>
-                            {% endif %}
-                            {% if slide.content %}
-                                <p><small>{{ slide.content| richtext_filters | safe }}</small></p>
-                            {% endif %}
-                            {% if slide.button_text and slide.button_link %}
-                                <a href="{{ slide.button_link }}" class="btn btn-default btn-sm pull-right">{{ slide.button_text }}</a>
-                            {% endif %}
+                                <h2>{{ slide.heading }}</h2>
+                                {% if slide.subheading %}
+                                    <h5>{{ slide.subheading }}</h5>
+                                {% endif %}
+                                {% if slide.button_link %}
+                                    <a href="{{ slide.button_link }}" class="btn btn-default btn-sm">{% if slide.button_text %}{{ slide.button_text }}{% else %}Learn more{% endif %}</a>
+                                {% endif %}
                         </div>
+
+                        {% if slide.content %}
+                            <div class="carousel-caption carousel-credit">
+                                <small>{{ slide.content| richtext_filters | safe }}</small>
+                            </div>
+                        {% endif %}
+
                     </div>
                     {% endif %}
                 {% endfor %}
@@ -82,11 +105,16 @@
             </div>
             <!-- Controls -->
             <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-            <span class="icon-prev"></span>
-        </a>
+                <span class="icon-prev"></span>
+            </a>
             <a class="right carousel-control" href="#myCarousel" data-slide="next">
-            <span class="icon-next"></span>
-        </a>
+                <span class="icon-next"></span>
+            </a>
+            <div class="carousel-static">
+                <div class="">
+                    <h1>{{homepage.leader_text}}</h1>
+                </div>
+            </div>
         </header>
 
         </div>
