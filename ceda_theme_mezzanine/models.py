@@ -173,8 +173,8 @@ class Slide(Orderable):
     homepage = models.ForeignKey(HomePage, related_name="slides")
     heading = models.CharField(max_length=100, blank=True)
     subheading = models.CharField(max_length=100, blank=True)
-    content = models.TextField(blank=True,
-        help_text="Add <br> for line breaks")
+    credit = models.CharField(max_length=100, blank=True,
+        help_text = "credit for slide image")
     button_text = models.CharField(max_length=100, blank=True,
         help_text="Optional, if present a button with the link specified "
                   "below will be in the slide")

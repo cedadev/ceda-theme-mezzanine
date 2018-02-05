@@ -41,7 +41,7 @@
 .carousel-credit {
     position:absolute;
     bottom:0;
-    right:10px;
+    right:150px;
     text-align: right;
     margin-top: 0px;
     padding-top: 0px;
@@ -92,9 +92,9 @@
                                 {% endif %}
                         </div>
 
-                        {% if slide.content %}
+                        {% if slide.credit %}
                             <div class="carousel-caption carousel-credit">
-                                <small>{{ slide.content| richtext_filters | safe }}</small>
+                                <small>{{ slide.credit| richtext_filters | safe }}</small>
                             </div>
                         {% endif %}
 
