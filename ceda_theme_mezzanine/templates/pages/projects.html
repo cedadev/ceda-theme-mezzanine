@@ -30,7 +30,7 @@
                                                     <span class="fa-stack fa-2x">
                                                             <i class="fa fa-circle fa-stack-2x text-primary"></i>
                                                             {% if item.icon %}
-                                                                <i class="fa {{ item.icon }} fa-stack-1x fa-inverse"></i>
+                                                                <i class="fa {{ item.portfolioitem.icon }} fa-stack-1x fa-inverse"></i>
                                                             {% else %}
                                                                 <i class="fa fa-tasks fa-stack-1x fa-inverse"></i>
                                                             {% endif %}
@@ -39,7 +39,7 @@
                 
                                                 <div class="media-body">
                                                     <h4 class="media-heading">{{item.title}}</h4>
-                                                    <p>{{item.subtitle}}</p>
+                                                    <p>{{item.portfolioitem.leader}}</p>
                                                 </div>
                                                 
                                             </div>

@@ -27,7 +27,7 @@ class PortfolioItemImageInline(TabularDynamicInlineAdmin):
 
 # Specify order for fields from custom model
 portfolioitem_fieldsets = deepcopy(PageAdmin.fieldsets)
-for field in ("icon", "subtitle", "intro", "content", "href", "button_text", "categories"):
+for field in ("icon", "leader", "intro", "content", "href", "button_text", "categories"):
     portfolioitem_fieldsets[0][1]["fields"].insert(-2, field)
 
 class PortfolioItemAdmin(PageAdmin):
