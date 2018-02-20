@@ -38,7 +38,8 @@ class PortfolioItem(Page, RichText):
     '''
     An individual portfolio item, should be nested under a Portfolio
     '''
-    subtitle = models.CharField(max_length=200, blank=True)
+    leader = models.CharField(max_length=200, blank=True,
+        help_text="leader text for display in parent portfolio")
     intro = RichTextField(blank=True,
         help_text="brief intro paragraph used for leader")
     icon = models.CharField(blank=True,

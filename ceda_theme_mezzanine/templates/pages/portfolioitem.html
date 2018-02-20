@@ -3,65 +3,32 @@
 {% load mezzanine_tags static columns %}
 
 {% block main %}
-<!-- Portfolio Item Row (images or icon, subheading, intro) -->
+<!-- Portfolio Item Row (image or logo, intro, icon) -->
 <div class="row">
-    {% with portfolioitem.notLogos.count as nslides %}
-    {% if nslides > 0 %}
-        <div class="col-md-6">
-            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                <!-- Indicators -->
-                {% if nslides > 1 %}
-                <ol class="carousel-indicators">
-                    {% with portfolioitem.notLogos as slides %}
-                        {% for slide in slides %}
-                            <li data-target="#carousel-example-generic" data-slide-to="{{forloop.counter0}}"  {% if forloop.first %}class="active"{% endif %}></li>
-                        {% endfor %}
-                    {% endwith %}
-                </ol>
+    <div class="col-md-4">
+        
+        {% if portfolioitem.notLogos %}
+            {% for image in portfolioitem.notLogos %}
+                {% if forloop.first %}
+
+                    <img src="{{ MEDIA_URL }}{{ image.file }}" class="img-responsive">
+
                 {% endif %}
+            {% endfor %}
+        {% elif portfolioitem.logo %}
+                    <img src="{{ MEDIA_URL }}{{ portfolioitem.logo.file }}" class="img-responsive">
+        {% else %}
+                    <img src="http://placehold.it/300x200">
+        {% endif %}
 
-                <!-- Wrapper for slides -->
-                <div class="carousel-inner">
-                    {% with portfolioitem.notLogos as slides %}
-                        {% for slide in slides %}
-                            <div class="item {% if forloop.first %}active{% endif %}" >
-                                <img class="img-responsive" src="{{ MEDIA_URL }}{% thumbnail slide.file 0 0 %}" alt="">
-                            </div>
-                        {% endfor %}
-                    {% endwith %}
-                </div>
+    </div>
 
-                <!-- Controls -->
-                
-                <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-                    <span class="glyphicon glyphicon-chevron-left"></span>
-                </a>
-                <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-                    <span class="glyphicon glyphicon-chevron-right"></span>
-                </a>
-            </div>
-        </div>
-    {% else %}
-        <div class="col-md-6">
-            <span class="fa-stack fa-3x">
-                <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                <i class="fa {% if portfolioitem.icon %}{{portfolioitem.icon}}{% else %}fa-info{% endif %} fa-stack-1x fa-inverse"></i>
-            </span>
-        </div>
-    {% endif %}
-    {% endwith %}
+    <div class="col-md-4">
+            {% if portfolioitem.intro %}{{ portfolioitem.intro|safe }}{% endif %}
+    </div>
 
-    <div class="col-md-6">
-        {% if portfolioitem.logo %}
-            {% with portfolioitem.logo as image %}
-            <span class="fa-stack fa-3x pull-right">
-            <i class="fa fa-stack-2x text-primary"></i>
-            <div class="thumbnail">
-                <img src="{{ MEDIA_URL }}{% thumbnail image.file 255 0 %}">
-            </div>
-            </span>
-            {% endwith %}
-        {% elif portfolioitem.icon %}
+    <div class="col-md-4">
+        {% if portfolioitem.icon %}
             <span class="fa-stack fa-3x pull-right">
                 <i class="fa fa-circle fa-stack-2x text-primary"></i>
                 <i class="fa {{portfolioitem.icon}} fa-stack-1x fa-inverse"></i>
@@ -73,12 +40,7 @@
             </span>
         {% endif %}
     </div>
-
-    <div class="col-md-6">
-        {% if portfolioitem.subtitle %}<h3>{{portfolioitem.subtitle}}</h3>{% endif %}
-        {% if portfolioitem.intro %}{{ portfolioitem.intro|safe }}{% endif %}
-    </div>
-
+        
 </div> <!-- /.row -->
 
 <!-- portfolio item row (content) -->
