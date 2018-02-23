@@ -16,35 +16,34 @@
         <!-- Tab panes -->
         <div class="tab-content">
             {% for child in page.children.all %}
-                <div role="tabpanel" class="tab-pane {% if forloop.first %} active {% endif %}" id="tab-{{forloop.counter}}">
-
+                <div role="tabpanel" class="tab-pane {% if forloop.first %} active {% endif %}" id="tab-{{forloop.counter}}" style="padding-top: 100;">
                     <div id="gallery" class="gallery three col-lg-12" style="clear: both;">
                         <div class="row">
                             {% for col in child.children.all|columns:3 %}
                                 {% for item in col %}
-                                    <div class="col-md-4 project-item">
-                                        <a href="{{item.get_absolute_url}}" title="project details">
-                                            <div class="media">
-                
-                                                <div class="pull-left">
-                                                    <span class="fa-stack fa-2x">
-                                                            <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                                                            {% if item.icon %}
+                                    <div class="col-md-4">
+                                            <div class="panel panel-default text-center">
+                                                <div class="panel-heading">    
+                                                        {% if item.portfolioitem.icon %}
+                                                            <span class="fa-stack fa-4x">
+                                                                <i class="fa fa-circle fa-stack-2x text-primary"></i>
                                                                 <i class="fa {{ item.portfolioitem.icon }} fa-stack-1x fa-inverse"></i>
-                                                            {% else %}
-                                                                <i class="fa fa-tasks fa-stack-1x fa-inverse"></i>
-                                                            {% endif %}
-                                                    </span>
+                                                            </span>
+                                                        {% else %}
+                                                            <span class="fa-stack fa-4x">
+                                                                <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                                                                <i class="fa fa-info fa-stack-1x fa-inverse"></i>
+                                                            </span>
+                                                        {% endif %}
+                            
                                                 </div>
-                
-                                                <div class="media-body">
-                                                    <h4 class="media-heading">{{item.title}}</h4>
-                                                    <p>{{item.portfolioitem.leader}}</p>
+                                                <div class="panel-body">
+                                                    <h4><a class="inherit-color" href="{{ item.get_absolute_url }}">{{ item.portfolioitem.title }}</a></h4>
+                                                    {{item.portfolioitem.leader | safe}}<br>
+                                                    <a href="{{ item.get_absolute_url }}" class="btn btn-default">Learn More</a>
                                                 </div>
-                                                
                                             </div>
-                                        </a>
-                                    </div>
+                                        </div>
                                 {% endfor %}
         
                             {% endfor %}
