@@ -8,14 +8,14 @@
 
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
-            {% for item in page.children.all %}
+            {% for item in page.children.published %}
                 <li role="presentation" {% if forloop.first %} class="active" {% endif %}><a href="#tab-{{forloop.counter}}" aria-controls="home" role="tab" data-toggle="tab">{{item.title}}</a></li>
             {% endfor %}
         </ul>
     
         <!-- Tab panes -->
         <div class="tab-content">
-            {% for child in page.children.all %}
+            {% for child in page.children.published %}
                 <div role="tabpanel" class="tab-pane {% if forloop.first %} active {% endif %}" id="tab-{{forloop.counter}}" style="padding-top: 100;">
                     <div id="gallery" class="gallery three col-lg-12" style="clear: both;">
                         <div class="row">
