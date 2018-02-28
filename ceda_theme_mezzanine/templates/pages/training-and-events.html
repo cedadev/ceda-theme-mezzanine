@@ -8,59 +8,59 @@
 
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
-            {% for item in page.children.published %}
-                <li role="presentation" {% if forloop.first %} class="active" {% endif %}><a href="#tab-{{forloop.counter}}" aria-controls="home" role="tab" data-toggle="tab">{{item.title}}</a></li>
+            {% for item in page.children.published|sort_by:"_order" %}
+                <li role="presentation" {% if forloop.last %} class="active" {% endif %}><a href="#tab-{{forloop.counter}}" aria-controls="home" role="tab" data-toggle="tab">{{item.title}}</a></li>
             {% endfor %}
         </ul>
     
         <!-- Tab panes -->
-        <div class="tab-content">
-                {% for child in page.children.published %}
-                    <div role="tabpanel" class="tab-pane {% if forloop.first %} active {% endif %}" id="tab-{{forloop.counter}}" style="padding-top: 100;">
-                        <div id="gallery" class="gallery three col-lg-12" style="clear: both;">
-                            <div class="row">
-                                {% for col in child.children.all|columns:1 %}
-                                    {% for item in col %}
-                                        <div class="col-md-10">
-                                                <div class="panel panel-primary">
-                                                    <div class="panel-heading">    
-                                                        <h3 class="panel-title">{{ item.portfolioitem.title }}</h3>
-                                                    </div>
-                                                    <div class="panel-body">
-                                                        <div class="row>">
-                                                            <div class="col-md-1">
-                                                                {% if item.portfolioitem.icon %}
-                                                                    <span class="fa-stack fa-2x">
-                                                                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                                                                        <i class="fa {{ item.portfolioitem.icon }} fa-stack-1x fa-inverse"></i>
-                                                                    </span>
-                                                                {% else %}
-                                                                    <span class="fa-stack fa-2x">
-                                                                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                                                                        <i class="fa fa-info fa-stack-1x fa-inverse"></i>
-                                                                    </span>
-                                                                {% endif %}
-                                                            </div>
-                                                            <div class="col-md-9">
-                                                                <p>{{item.portfolioitem.leader|safe}}</p>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <a href="{{ item.portfolioitem.get_absolute_url }}" class="btn btn-default pull-right">Learn More</a>
-                                                            </div>
+        <div class="tab-content" style="margin-top: 20px;">
+            {% for child in page.children.published|sort_by:"_order" %}
+                <div role="tabpanel" class="tab-pane {% if forloop.last %} active {% endif %}" id="tab-{{forloop.counter}}" style="padding-top: 100;">
+                    <div id="gallery" class="gallery three col-lg-12" style="clear: both;">
+                        <div class="row">
+                            {% for col in child.children.all|sort_by:"_order"|columns:1 %}
+                                {% for item in col %}
+                                    <div class="col-md-10">
+                                            <div class="panel panel-primary">
+                                                <div class="panel-heading">    
+                                                    <h3 class="panel-title">{{ item.portfolioitem.title }}</h3>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <div class="row>">
+                                                        <div class="col-md-1">
+                                                            {% if item.portfolioitem.icon %}
+                                                                <span class="fa-stack fa-2x">
+                                                                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                                                                    <i class="fa {{ item.portfolioitem.icon }} fa-stack-1x fa-inverse"></i>
+                                                                </span>
+                                                            {% else %}
+                                                                <span class="fa-stack fa-2x">
+                                                                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                                                                    <i class="fa fa-info fa-stack-1x fa-inverse"></i>
+                                                                </span>
+                                                            {% endif %}
                                                         </div>
-
-                                                        
+                                                        <div class="col-md-9">
+                                                            <p>{{item.portfolioitem.leader|safe}}</p>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <a href="{{ item.portfolioitem.get_absolute_url }}" class="btn btn-default pull-right">Learn More</a>
+                                                        </div>
                                                     </div>
+
+                                                    
                                                 </div>
                                             </div>
-                                    {% endfor %}
-            
+                                        </div>
                                 {% endfor %}
-                            </div>
-                        </div>               
-    
-                    </div>
-                {% endfor %}
+        
+                            {% endfor %}
+                        </div>
+                    </div>               
+
+                </div>
+            {% endfor %}
         
     </div>
 
